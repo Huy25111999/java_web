@@ -1,0 +1,42 @@
+@import helper._
+@import play.mvc.Http._
+@import play.data.Form
+@import vn.m2m.common.models.User
+@import vn.m2m.common.models.forms.SearchConditionForm
+@import vn.m2m.utils.StaticData
+@import vn.m2m.utils.DateUtil
+@import vn.m2m.utils.SearchUtil
+@(currentUser: User,divRoot:String,conditionName:String,conditionStart: SearchConditionForm, conditionEnd: SearchConditionForm,i: Int)
+
+<div id="@divRoot" class="search-field">
+    <div class="row">
+        <label class="col-sm-2 col-form-label">@Messages("filter."+conditionName)</label>
+        <div class="col-sm-2 advancedSearchFrom" style="display: none">
+            <input name="conditionList[@i].fieldName"  value="@conditionName" class="form-control"  style="display: none">
+            <input name="conditionList[@i].fieldType"  value='@SearchUtil.SEARCH_DOUBLE_TYPE' class="form-control"  style="display: none">
+
+            <select class="selectpicker conditionOptionValue" id="conditionOptionValue-@conditionName" name="conditionList[@i].compQueryOp" data-style="btn btn-primary" >
+                <option value=@SearchUtil.SEARCH_EQUAL_OP_STRING @if(conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_EQUAL_OP_STRING)){selected} >@SearchUtil.SEARCH_EQUAL_OP_STRING</option>
+                <option value=@SearchUtil.SEARCH_NOT_EQUAL_OP_STRING  @if(conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_NOT_EQUAL_OP_STRING)){selected} >@SearchUtil.SEARCH_NOT_EQUAL_OP_STRING</option>
+                <option value=@SearchUtil.SEARCH_LTE_OP_STRING  @if(conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_LTE_OP_STRING)){selected} >@SearchUtil.SEARCH_LTE_OP_STRING</option>
+                <option value=@SearchUtil.SEARCH_GTE_OP_STRING  @if(conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_GTE_OP_STRING)){selected} >@SearchUtil.SEARCH_GTE_OP_STRING</option>
+                <option value=@SearchUtil.SEARCH_BETWEEN_OP_STRING  @if(conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_BETWEEN_OP_STRING)){selected} >@SearchUtil.SEARCH_BETWEEN_OP_STRING</option>
+            </select>
+        </div>
+        <div class="col-sm-3" >
+            <div class="form-group">
+                <input name="conditionList[@i].fieldValue" class="conditionDoubleValue form-control"  placeholder="123..."  value="@conditionStart.getFieldValue">
+            </div>
+        </div>
+        <div class="col-sm-3" id="rightBetween-@conditionName" @if(!conditionStart.getCompQueryOp.equals(SearchUtil.SEARCH_BETWEEN_OP_STRING)){style="display: none"}>
+            <div class="form-group">
+                <input name="conditionList[@(i+1)].fieldName"  value="@conditionName" class="form-control"  style="display: none">
+                <input name="conditionList[@(i+1)].compQueryOp"  value=@SearchUtil.SEARCH_LTE_OP_STRING class="form-control"  style="display: none">
+                <input name="conditionList[@(i+1)].fieldType"  value=@SearchUtil.SEARCH_DOUBLE_TYPE class="form-control" style="display: none">
+                <input name="conditionList[@(i+1)].fieldValue" class="conditionDoubleValue form-control"  placeholder="123..." value="@conditionEnd.getFieldValue">
+            </div>
+        </div>
+
+    </div>
+
+</div>

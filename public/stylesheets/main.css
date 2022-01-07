@@ -1,0 +1,12 @@
+.modal-body .form-group label {
+    color: #888888;
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.modal-body .form-group label.error {
+    text-transform: none;
+    color: #FB404B;
+}

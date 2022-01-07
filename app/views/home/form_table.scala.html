@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form_NguoiDung</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style >
+
+        .content{
+            display: flex;
+            width: 800px;
+            margin-top: 20px;
+        }
+        *,table{
+            margin: 0 auto;
+            padding: 0 auto;
+            box-sizing: border-box;
+            border-collapse: collapse;
+        }
+        .form_table tr, td,th{
+            padding: 12px;
+            border: 1px solid #000000;
+            border-collapse: collapse;
+        }
+        .content_add{
+            text-align: center;
+        }
+        /modal/
+
+        #modal form input{
+            display: block;
+        }
+
+        #modal{
+            margin-top: 50px;
+            width: 500px;
+            background: #76808a;
+            color: #000;
+        }
+        .form-content {
+            margin: 90px;
+        }
+
+        #modal .modal_close {
+            height: 48px;
+            color: #000000;
+            font-size: 35px;
+            text-align: right;
+            padding: 20px;
+            margin-right: -70px;
+        }
+
+        form.submit {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .form-content .form_head{
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+        }
+
+        .form-content .form-text{
+            display: flex;
+            padding: 14px;
+        }
+        .form-content .form-text label{
+            width: 100px;
+        }
+        .form-content .input .form_bottom{
+            text-align: center;
+            padding-bottom: 20px ;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div id="database"> </div>
+
+        <div class="content_add">
+            <form action="" class = "submit">
+                <input class="submit" type="button"  value = "Thêm" onclick="document.getElementById('modal').style.display='block';document.getElementById('Save').style.display='none' ;document.getElementById('Add').style.display='block' ;">
+            </form>
+        </div>
+
+    </div>
+
+<!--</div>-->
+    <div id="modal" style="display: none">
+
+        <div class="form-content">
+            <div class="modal_close" onclick="document.getElementById('modal').style.display='none';">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+            <div class="form_head">
+                <h3>Form thành viên</h3>
+            </div>
+            <form class = "input">
+                <div class = "form-text">
+                    <label for="">STT</label>
+                    <input  class = "" type="text" name="stt" id="stt">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">MTV</label>
+                    <input type="text" name="id" id="id">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">Họ Tên</label>
+                    <input type="text" name="hoTen" id="hoTen">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">Ngày sinh</label>
+                    <input type="text" name="ngaySinh" id="ngaySinh">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">Quê quán</label>
+                    <input type="text" name="queQuan" id="queQuan">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">Số CMND</label>
+                    <input type="text" name="soCMND" id="soCMND">
+                </div>
+
+                <div class = "form-text">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone" id="phone">
+                </div>
+
+                <div class="form_bottom">
+                    <input type="button" id = "Add"  value="Add" onclick="them();">
+                    <input type="button"  id = "Save" value="Save" onclick="capNhat(this);">
+                    <input type="button" id = "Reset" value="Reset" onclick="resetRow();">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+<script>
+    var data = [];
+    function check(){
+        var Stt = document.getElementById('stt').value;
+        var Id = document.getElementById('id').value;
+        var HoTen = document.getElementById('hoTen').value;
+        var NgaySinh = document.getElementById('ngaySinh').value;
+        var QueQuan = document.getElementById('queQuan').value;
+        var SoCMND = document.getElementById('soCMND').value;
+        var Phone = document.getElementById('phone').value;
+        if (Stt=="")
+        {
+            alert("STT ko được để trống");
+            return false ;
+        }
+        if( Id == "") {
+            alert("ID ko được để trống");
+            return false;
+        }
+        if( HoTen == "") {
+            alert("Họ tên ko được để trống");
+            return false;
+        }
+        if( NgaySinh == "") {
+            alert("NgaySinh ko được để trống");
+            return false;
+        }
+        if( QueQuan == ""){
+            alert("QueQuan ko được để trống");
+            return false ;
+        }
+        if( SoCMND == "") {
+            alert("soCMND ko được để trống");
+            return false;
+        }
+        if ( Phone == "") {
+            alert("phone ko được để trống");
+            return false;
+        }
+        return true ;
+    }
+
+    function hienThi(){
+        var list = this.data ;
+        var table = '<table class = "form_table" id ="form_table1"><thead><tr><th>STT</th><th>MTV</th><th>Họ Tên</th> <th>Ngày sinh</th><th>Quê quán</th><th>Số CMND</th><th>Phone</th><th>Chức năng</th></tr></thead><tbody>';
+        var skill =  "<input class=\"submit\" type=\"button\" value = \"Delete\" onclick=\"deleteRow(this) ;\">\n" +
+            " <input class=\"submit\" type=\"button\" value = \"Sửa\" onclick=\"document.getElementById('modal').style.display='block';editRow(this);\">" ;
+        for (var i = 0; i<list.length; i++){
+            table +='<tr>';
+            table +='<td>'+list[i].stt+'</td>';
+            table +='<td>'+list[i].id+'</td>';
+            table +='<td>'+list[i].hoTen+'</td>';
+            table +='<td>'+list[i].ngaySinh+'</td>';
+            table +='<td>'+list[i].queQuan+'</td>';
+            table +='<td>'+list[i].soCMND+'</td>';
+            table +='<td>'+list[i].phone+'</td>';
+            table +='<td>'+skill+'</td>';
+            table +='</tr>';
+
+        }
+        table += '</tbody></table>';
+        document.getElementById('database').innerHTML = table ;
+
+    }
+
+    var item = {
+        stt :stt,
+        id :id,
+        hoTen :hoTen,
+        ngaySinh :ngaySinh,
+        queQuan :queQuan,
+        soCMND :soCMND,
+        phone :phone,
+    };
+
+    function checkID(id){
+        var id = document.getElementById('id').value;
+        var list = this.data;
+        for (var i=0; i<list.length; i++){
+            if (list[i].id == id){
+                return true ;
+            }
+        }
+    }
+    function them(){
+        var stt = document.getElementById('stt').value;
+        var id = document.getElementById('id').value;
+        var hoTen = document.getElementById('hoTen').value;
+        var ngaySinh = document.getElementById('ngaySinh').value;
+        var queQuan = document.getElementById('queQuan').value;
+        var soCMND = document.getElementById('soCMND').value;
+        var phone = document.getElementById('phone').value;
+        var item = {
+            stt :stt,
+            id :id,
+            hoTen :hoTen,
+            ngaySinh :ngaySinh,
+            queQuan :queQuan,
+            soCMND :soCMND,
+            phone :phone,
+        };
+        if (check()){
+            this.data.push(item);
+            hienThi() ;
+            document.getElementById('Save').style.display="none" ;
+        }
+
+    }
+
+    //reset
+    function resetRow(){
+        document.getElementById('stt').value = "";
+        document.getElementById('id').value = "";
+        document.getElementById('hoTen').value = "";
+        document.getElementById('ngaySinh').value = "";
+        document.getElementById('queQuan').value = "";
+        document.getElementById('soCMND').value = "";
+        document.getElementById('phone').value = "";
+    }
+
+    // Sửa
+    var selectedIndex = -1 ;
+    function  editRow(el){
+        var selectedRow = el.parentElement.parentElement;
+        var stt = selectedRow.cells[0].innerText;
+        var id = selectedRow.cells[1].innerText;
+        var hoTen = selectedRow.cells[2].innerText;
+        var ngaySinh = selectedRow.cells[3].innerText;
+        var queQuan = selectedRow.cells[4].innerText;
+        var soCMND = selectedRow.cells[5].innerText;
+        var phone = selectedRow.cells[6].innerText;
+
+        document.getElementById('stt').value = stt;
+        document.getElementById('id').value = id;
+        document.getElementById('hoTen').value = hoTen;
+        document.getElementById('ngaySinh').value = ngaySinh;
+        document.getElementById('queQuan').value = queQuan ;
+        document.getElementById('soCMND').value = soCMND;
+        document.getElementById('phone').value = phone;
+
+        selectedIndex = parseInt(selectedRow.cells[0].innerText)-1;
+
+        document.getElementById('Add').style.display="none" ;
+        document.getElementById('Save').style.display="block" ;
+    }
+    function capNhat(){
+        data[selectedIndex].stt =  document.getElementById('stt').value;
+        data[selectedIndex].id =  document.getElementById('id').value;
+        data[selectedIndex].hoTen =  document.getElementById('hoTen').value;
+        data[selectedIndex].ngaySinh =  document.getElementById('ngaySinh').value;
+        data[selectedIndex].queQuan =  document.getElementById('queQuan').value;
+        data[selectedIndex].soCMND =  document.getElementById('soCMND').value;
+        data[selectedIndex].phone =  document.getElementById('phone').value;
+        console.log(selectedIndex);
+        hienThi() ;
+    }
+
+    //   Xóa
+    function deleteRow(row){
+        var i=row.parentNode.parentNode.rowIndex;
+        if (confirm("Bạn có muốn xóa không! "))
+        {
+            document.getElementById('form_table1').deleteRow(i);
+        }
+    }
+</script>
+</body>
+
+</html>

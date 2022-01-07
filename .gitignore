@@ -1,0 +1,12 @@
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+project/project/
+/RUNNING_PID
+/.sbtserver/
+/.g8/
+/binanceauto-*.gz
+/.idea/

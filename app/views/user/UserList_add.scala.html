@@ -1,0 +1,39 @@
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display : none ;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">@Messages("New User")</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" >
+          <label>@Messages("username")</label>
+          <input id="usernameNew" class="form-control" name="username">
+        </div>
+
+        <div class="form-group" >
+          <label>@Messages("Password")</label>
+          <input id="password" class="form-control" name="password" type="password" >
+        </div>
+        <div class="form-group" >
+          <label>@Messages("Repeat password")</label>
+          <input id="passwordRepeat" class="form-control" name="repeatpassword" type="password">
+        </div>
+
+        <div class="form-group" >
+          <label>@Messages("Role")</label><br>
+          <select id="roleNew" style="width: 100%">
+            <option value="4">@Messages("Admin")</option>
+            <option value="1">@Messages("User")</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success btn-simple btn-fill" data-dismiss="modal" onclick="submitAddUser()"><i class="fa fa-floppy-o" aria-hidden="true"></i>@Messages("btnSave")</button>
+        <button type="button" class="btn btn-default btn-simple btn-fill" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> @Messages("btnClose")</button>
+      </div>
+    </div>
+  </div>
+</div>

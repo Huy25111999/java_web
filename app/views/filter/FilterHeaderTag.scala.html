@@ -1,0 +1,122 @@
+@import helper._
+@import vn.m2m.common.models.User
+@import vn.m2m.common.models.forms.SearchFilterForm
+@import vn.m2m.utils.SearchUtil
+
+@(currentUser:User,searchFilterForm:SearchFilterForm , searchFieldArray: List[String], actionForm:String)
+@import java.math.BigInteger; var iterator = 0;
+<div class="advanced-search" id="advanced-search-bar">
+    <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="card-title">
+                        <a style="color: #428bca" id="aShowAdminFilter" href="javascript:void(0)" @if(!searchFieldArray.isEmpty){onclick="showAdminFilter()"}>@Messages("Admin.Filters",searchFilterForm.getTotalResult)</a>
+                        <a style="color: #428bca" id="aShowAdminFilter2" href="javascript:void(0)" @if(!searchFieldArray.isEmpty){onclick="showAdminFilter()"}>@Messages("Admin.expande")</a>
+                    </h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="toolbar" id="advanced-search-filterToolbar" style="float: right;display: none">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        <a id="ApplyFilter" class="btn btn-rose" onclick="ApplyFilter(@searchFilterForm.getPage,@searchFilterForm.getPageSize,true)">
+                            <i class="fa fa-filter"></i> @Messages("Admin.Filters.apply")
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="card-body">
+            <div id="search-filter-body" style="display: none">
+                <form action=@actionForm  method="POST" id="search-filter-form"  class="form-horizontal">
+                    @*CSRF.formField*@
+                    <div class="col-md-12 search-field-header">
+                        <input name="page"  value="@searchFilterForm.getPage"  style="display: none">
+                        <input name="pageSize"  value="@searchFilterForm.getPageSize"   style="display: none">
+                        <input name="isResetPage"  value="@searchFilterForm.isResetPage"   style="display: none">
+                        <input name="sortFieldName"  value="@searchFilterForm.getSortFieldName"   style="display: none">
+                        <input name="isDesc"  value="@searchFilterForm.isDesc"   style="display: none">
+                        <div class="col-md-0" >
+                            <div style="display: none">
+                                <select id="ChooseFilter" name="filter[]"  multiple data-title="Choose Filters" class="selectpicker" data-style="btn-info btn-fill btn-block" data-menu-style="dropdown-blue">
+                                @for((item, index) <- searchFieldArray.zipWithIndex) {
+                                    @if(index % 2 == 1) {
+                                        <option value="@item">@item</option>
+                                    }
+                                }
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    @if(searchFilterForm.getConditionList.size() <2){
+                        @for((item, index) <- searchFieldArray.zipWithIndex) {
+                            @if(index % 2 == 0) {
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_STRING_TYPE)){
+                                    @views.html.filter.FilterConditionStringTag(currentUser,searchFieldArray(index+1), searchFieldArray(index+1), searchFilterForm.getConditionList.get(0), iterator)
+                                    @{iterator+=1}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_BOOLEAN_TYPE)){
+                                    @views.html.filter.FilterConditionBooleanTag(currentUser,searchFieldArray(index+1), searchFieldArray(index+1), searchFilterForm.getConditionList.get(0), iterator)
+                                    @{iterator+=1}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_DATE_TYPE)){
+                                    @views.html.filter.FilterConditionDatetimeTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(0), searchFilterForm.getConditionList.get(0), iterator)
+                                    @{iterator+=2}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_INT_TYPE)){
+                                    @views.html.filter.FilterConditionIntTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(0), searchFilterForm.getConditionList.get(0), iterator)
+                                    @{iterator+=2}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_DOUBLE_TYPE)){
+                                    @views.html.filter.FilterConditionDoubleTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(0), searchFilterForm.getConditionList.get(0), iterator)
+                                    @{iterator+=2}
+                                }
+                            }
+                        }
+                    }else {
+                        @for((item, index) <- searchFieldArray.zipWithIndex) {
+                            @if(index % 2 == 0) {
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_STRING_TYPE)){
+                                    @views.html.filter.FilterConditionStringTag(currentUser,searchFieldArray(index+1), searchFieldArray(index+1), searchFilterForm.getConditionList.get(iterator), iterator)
+                                    @{iterator+=1}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_BOOLEAN_TYPE)){
+                                    @views.html.filter.FilterConditionBooleanTag(currentUser,searchFieldArray(index+1), searchFieldArray(index+1), searchFilterForm.getConditionList.get(iterator), iterator)
+                                    @{iterator+=1}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_DATE_TYPE)){
+                                    @views.html.filter.FilterConditionDatetimeTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(iterator), searchFilterForm.getConditionList.get(iterator+1), iterator)
+                                    @{iterator+=2}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_INT_TYPE)){
+                                    @views.html.filter.FilterConditionIntTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(iterator), searchFilterForm.getConditionList.get(iterator+1), iterator)
+                                    @{iterator+=2}
+                                }
+                                @if(searchFieldArray(index).equals(SearchUtil.SEARCH_DOUBLE_TYPE)){
+                                    @views.html.filter.FilterConditionDoubleTag(currentUser,searchFieldArray(index+1),searchFieldArray(index+1), searchFilterForm.getConditionList.get(iterator), searchFilterForm.getConditionList.get(iterator+1), iterator)
+                                    @{iterator+=2}
+                                }
+                            }
+                        }
+                    }
+                    <div class="search-field col-md-12" >
+                        <div class="col-md-2 col-md-offset-9" >
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+
+

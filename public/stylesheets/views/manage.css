@@ -1,0 +1,33 @@
+.td-wrapword{
+    min-width:200px;
+    max-width:20%;
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;       /* css-3 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    word-break: break-all;
+    white-space: normal;
+}
+
+.dataTable>thead>tr>th, .dataTable>tbody>tr>th, .dataTable>tfoot>tr>th, .dataTable>thead>tr>td, .dataTable>tbody>tr>td, .dataTable>tfoot>tr>td {
+    padding: 10px !important;
+}
+
+.navbar.navbar-transparent {
+    background-color: #3C4858 !important;
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg {
+        display: none;
+    }
+}
+@media (max-width: 991px) {
+    .navbar-expand-lg {
+        display: block;
+    }
+    .content {
+        margin-top: 70px;
+    }
+}

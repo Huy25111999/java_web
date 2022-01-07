@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        @views.html.title("Dự Án")
+
+        @views.html.tags.main_css()
+        <style>
+    .input-icons i {
+        position: static;
+        width: 65px;
+        height: 18px;
+        left: 32px;
+        top: 0px;
+
+        font-family: FS PF BeauSans Pro;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 18px;
+    }
+     .input-icons {
+
+         position: static;
+         width: 60px;
+         height: 18px;
+         left: 32px;
+         top: 0px;
+     }
+     .input-icons {
+         position: static;
+         width: 60px;
+         height: 18px;
+         left: 32px;
+     }
+     .input-icons {
+         position: static;
+         width 47px;
+         height: 18px;
+         left: 0px;
+     }
+     .input-icons {
+         position: static;
+         width 47px;
+         height: 18px;
+         left: 0 px;
+     }
+     .input-icons {
+         position: static;
+         width: 52px;
+         height: 18px;
+         left: 0px;
+     }
+     .input-icons {
+         position: static;
+         width: 70px;
+         height: 18px;
+         left: 0px;
+     }
+        </style>
+    </head>
+    <body>
+        <div class="wapper">
+            <div class="row">
+                <div class="wrapper">
+                    <div class="sidebar-wrapper" data-simplebar="true">
+                        <div class="sidebar-header">
+                            <div>
+                                <img src="@routes.Assets.versioned("images/logo_platform.png")" class="logo-icon" alt="logo icon" style="width: 252px; height: 84px;">
+                            </div>
+                            <div class="toggle-icon ms-auto" id="arrowMenu" style="display: none"><i class='bx bx-arrow-to-left'>
+                            </div>
+                            <div class="wrapper">
+                                <div class="sidebar-wrapper" data-simplebar="true">
+                                    <div class="sidebar-header">
+                                        <div>
+                                    </div>
+                                        <!--navigation-->
+                                    <ul class="metismenu" id="menu">
+
+                                        <li id="menu-overview">
+                                            <a href="/overview/2b43606f-04f5-469b-a7f0-28f3f58c6059">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Tổng quan</div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="has-arrow" aria-expanded="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Thiết bị</div>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a class="has-arrow" aria-expanded="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Đám mây</div>
+                                            </a>
+                                        </li>
+
+                                        <li class="">
+                                            <a class="has-arrow" aria-expanded="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Ứng dụng</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" aria-expanded="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Thiết Bị</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" aria-expanded="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Ứng dụng</div>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" aria-hidden="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="">
+                                                </div>
+                                                <div class="menu-title">Tích Hợp</div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" aria-hidden="false">
+                                                <div class="parent-icon">
+                                                    <img src="@routes.Assets.versioned("images/overview.png")" class="logo-icon" alt="logo icon" style="" >
+                                                </div>
+                                                <div class="menu-title">Thanh toán </div>
+                                            </a>
+                                        </li>
+                                        <header>
+                                        <div class="topbar d-flex align-items-center">
+                                            <nav class="navbar navbar-expand">
+                                                <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
+                                                </div>
+
+                                                <div class="top-menu ms-auto">
+                                                    <ul class="navbar-nav align-items-center">
+                                                        <li class="nav-item dropdown dropdown-large">
+                                                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="https://hoangpm11.gitbook.io/innoway" target="_blank" style="font-size: 18px">
+                                                                <i class='bx bx-notepad'></i> Chào Hằng
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="nav-item dropdown dropdown-large">
+                                                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px">
+                                                                <i class='bx bx-atom'></i>Quản Lý dự án  <i class='bx bx-caret-down'></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:;">
+                                                                    <div class="msg-header">
+                                                                        <p class="msg-header-title">Cài đặt
+                                                                    </div>
+                                                                </a>
+                                                            <div class="header-message-list" id="headerListProject"></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                        <div class="">
+                                            <p>Bạn chưa có ứng dụng nào, hãy bắt đầu hãy bắt đầu bằng ứng dụng có sẵn,hoặc tạo mới của riêng bạn</p>
+                                        </div>
+                                    </ul>
+                                </div>
+                                    <form class="row g-3">
+                                        <div class="col-md-12" hidden>
+                                            <input id="idCreateDeviceToken" name="id" type="text" class="form-control" maxlength="50" autocomplete="off" required>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="getDeviceTokenModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" id="theme16">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Device Token</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row g-3">
+                                        <div class="col-md-12">
+                                            <input id="deviceToken" type="text" value="z2BDm9vSH8qbR7Lc1zKYW0SU8aPTd1J4" class="form-control" maxlength="50" autocomplete="off" required>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="row g-0" style="cursor: pointer" onclick="window.location='/widgetPage/2b43606f-04f5-469b-a7f0-28f3f58c6059';">
+                        <div class="col-md-6">
+                            <img src="/assets/images/overview/dashboard.png" alt="..." class="card-img" style="height: 200px; padding: 15px">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body" style="height: 100%;overflow: auto; min-height: 100px">
+
+                                <p class="card-text">Ngày tạo: 20 - 11 - 2021</p>
+                                <p class="card-text"><small class="">Thông tin mô tả: Hỗ trợ người dùng dễ dàng theo dõi, giám sát các thiết bị trong dự án của mình.</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card w-100">
+                    <div class="row g-0">
+                        <div class="card-header border-bottom" style="background-color: #EC1B2E;">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0" style="color: white; font-weight: bold">Bảng điều khiển mẫu 2</h6>
+                                </div>
+                                <div class="font-22 ms-auto text-black-50"><i class="bx bx-dots-horizontal-rounded"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0" style="cursor: pointer" onclick="window.location='/widgetPage/2b43606f-04f5-469b-a7f0-28f3f58c6059';">
+                        <div class="col-md-6">
+                            <img src="/assets/images/overview/dashboard2.png" alt="..." class="card-img" style="height: 200px; padding: 15px">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body" style="height: 100%;overflow: auto; min-height: 100px">
+
+                                <p class="card-text">Ngày tạo: 20 - 11 - 2021</p>
+                                <p class="card-text"><small class="">Thông tin mô tả: Hỗ trợ người dùng dễ dàng theo dõi, giám sát các thiết bị trong dự án của mình.</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="ml-auto mr-auto text-center" style="margin-top: 5rem !important;">
+                    <button type="button" class="btn btn-danger px-5 radius-15 modal-title" style="padding: 15px;" onclick="window.location='/widgetPage/2b43606f-04f5-469b-a7f0-28f3f58c6059';">
+                        <i class="bx bx-plus-circle mr-1"></i>Tạo mới bảng điều khiển
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3 ">
+            <div class="breadcrumb-title pe-3" style="font-weight: bold">Ứng dụng</div><br>
+        </div>
+        <div class="row">
+            <h6 class="mb-0 mb-2">Bạn chưa có Ứng dụng nào, hãy bắt đầu bằng mẫu bảng có sẵn hoặc tạo mới của riêng bạn</h6>
+            <div class="col-md-4">
+                <div class="card w-100">
+                    <div class="row g-0">
+                        <div class="card-header border-bottom" style="background-color: #aaa;">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0" style="color: white; font-weight: bold">Ứng dụng mẫu</h6>
+                                </div>
+                                <div class="font-22 ms-auto text-black-50"><i class="bx bx-dots-horizontal-rounded"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="@routes.Assets.versioned("images/overview.png")" alt="..." class="card-img" style="height: 100%; padding: 15px">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body" style="height: 100%;overflow: auto; min-height: 100px">
+
+                                <p class="card-text">Ngày tạo: 20 - 12 - 2021</p>
+                                <p class="card-text"><small class="">Thông tin mô tả : ...comming soon!</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="ml-auto mr-auto text-center" style="margin-top: 5rem !important;">
+                            <button type="button" class="btn px-5 radius-15 modal-title" style="padding: 15px; background-color: #aaa; color: white">
+                                <i class="bx bx-plus-circle mr-1"></i>Tạo mới bảng ứng dụng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3 ">
+                    <div class="breadcrumb-title pe-3" style="font-weight: bold">Flow engine</div><br>
+                </div>
+                <div class="row" id="listFlowEngine">
+                </div>
+                <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3 ">
+                    <div class="breadcrumb-title pe-3" style="font-weight: bold">Tổng quan dữ liệu kết nối</div><br>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card w-100">
+                            <div class="row g-0">
+                                <div class="card-header border-bottom" style="background-color: #EC1B2E;">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <h5 class="card-text align-items-center" style="color: white; font-weight: bold; text-transform: uppercase;">Tổng số kết nối</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="card-text align-items-center" style="color: white; font-weight: bold;" id="countDevice">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-12">
+                                    <div class="card-body" style="height: 100%;overflow: auto; min-height: 100px; background-image: url('/assets/images/bgThemes/4.png')">
+                                        <div id="chart1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card w-100">
+                            <div class="row g-0">
+                                <div class="card-header border-bottom" style="background-color: #EC1B2E;">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <h5 class="card-text align-items-center" style="color: white; font-weight: bold; text-transform: uppercase;">Tổng số bản tin </h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="card-text align-items-center" style="color: white; font-weight: bold;" id="countMess">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="card-header border-botton" style="...">
+                                    <div class="row">
+                                        <h5 class="card-text align-items-center" style="...">Tổng số bản tin </h5>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h5 class="card-text aligin-items-center" style="..." id="countMess">0</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card-body" style="height: 100%;overflow: auto; min-height: 100px; background-image: url('/assets/images/bgThemes/4.png')">
+                                        <div id="chart3"></div>
+                                        <div id="chart4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @views.html.tags.main_js()
+    </body>
+</html>
+
+
+
+
+

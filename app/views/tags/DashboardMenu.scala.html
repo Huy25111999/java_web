@@ -1,0 +1,68 @@
+@import play.mvc.Http._
+@import vn.m2m.common.models.User
+@import vn.m2m.utils.UserHelper
+@(currentUser:User)
+<div class="sidebar" data-color="rose" data-background-color="black" data-image="@routes.Assets.versioned("images/loginbg.png")">
+    <div class="logo">
+        <a href="" class="simple-text logo-mini">
+            VA
+        </a>
+        <a href="" class="simple-text logo-normal">
+            vTag Admin
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="@routes.Assets.versioned("images/logo.png")" />
+            </div>
+            <div class="user-info">
+                <a data-toggle="collapse" href="#collapseExample" class="username">
+                    <span>
+                        @currentUser.getUsername
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <div class="collapse" id="collapseExample">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> MP </span>
+                                <span class="sidebar-normal"> My Profile </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> EP </span>
+                                <span class="sidebar-normal"> Edit Profile </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> S </span>
+                                <span class="sidebar-normal"> Settings </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav">
+        @if(UserHelper.isAdminPermit(currentUser)){
+            <li class="nav-item" id="menu-manageUser">
+                <a class="nav-link" href="@routes.UserController.userList()">
+                    <i class="fa fa-user"></i>
+                    <p> @Messages("Manage User") </p>
+                </a>
+            </li>
+        }
+
+            <li class="nav-item ">
+                <a class="nav-link" href="@routes.Application.logout()">
+                    <i class="fa fa-sign-out"></i>
+                    <p> @Messages("Logout") </p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

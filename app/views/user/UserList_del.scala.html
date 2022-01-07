@@ -1,0 +1,24 @@
+<form action="@routes.UserController.deleteUser()" method="POST">
+  <div class="modal fade" id="deleteconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display : none ;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel">@Messages("Are you want delete this user?")</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group" >
+            <label for="id">@Messages("ID")</label>
+            <input id="idDelete" class="form-control" name="id" value="" readonly>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success btn-simple btn-fill"><i class="fa fa-floppy-o" aria-hidden="true"></i>@Messages("Save")</button>
+          <button type="button" class="btn btn-default btn-simple btn-fill" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i> @Messages("Close")</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,30 @@
+@import helper._
+@import play.mvc.Http._
+@import play.data.Form
+@import vn.m2m.common.models.User
+@import vn.m2m.common.models.forms.SearchConditionForm
+@import vn.m2m.utils.StaticData
+@import vn.m2m.utils.DateUtil
+@import vn.m2m.utils.SearchUtil
+
+@import org.springframework.util.StringUtils
+@(currentUser: User,divRoot:String,conditionName:String,condition: SearchConditionForm, i: Int)
+<div id="@divRoot" class="search-field">
+    <div class="row">
+        <label class="col-sm-2 col-form-label">@Messages("filter."+conditionName)</label>
+        <div class="col-sm-2 advancedSearchFrom" style="display: none">
+            <select class="selectpicker conditionOptionValue" id="conditionOptionValue-@conditionName" name="conditionList[@i].compQueryOp" data-style="btn btn-primary" >
+                <option value=@SearchUtil.SEARCH_EQUAL_OP_STRING @if(condition.getCompQueryOp.equals(SearchUtil.SEARCH_EQUAL_OP_STRING)) {selected} >@SearchUtil.SEARCH_EQUAL_OP_STRING</option>
+                <option value=@SearchUtil.SEARCH_NOT_EQUAL_OP_STRING  @if(condition.getCompQueryOp.equals(SearchUtil.SEARCH_NOT_EQUAL_OP_STRING)) {selected}>@SearchUtil.SEARCH_NOT_EQUAL_OP_STRING</option>
+            </select>
+        </div>
+        <div class="col-sm-6" >
+            <div class="form-group">
+                <input name="conditionList[@i].fieldName"  value="@conditionName" class="form-control" style="display: none">
+                <input name="conditionList[@i].fieldType"  value='@SearchUtil.SEARCH_STRING_TYPE' class="form-control"  style="display:none">
+                <input name="conditionList[@i].fieldValue" class="conditionTextValue form-control"  placeholder="" value="@condition.getFieldValue">
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,29 @@
+@import helper._
+@import play.mvc.Http._
+@import play.data.Form
+@import vn.m2m.common.models.User
+@import vn.m2m.common.models.forms.SearchConditionForm
+@import vn.m2m.utils.StaticData
+@import vn.m2m.utils.DateUtil
+@import vn.m2m.utils.SearchUtil
+
+@(currentUser: User,divRoot:String,conditionName:String,condition: SearchConditionForm, i: Int)
+<div id="@divRoot" class="search-field">
+    <div class="row">
+        <label class="col-sm-2 col-form-label">@Messages("filter."+conditionName)</label>
+
+        <div class="col-sm-6" >
+            <div class="form-group">
+                <input name="conditionList[@i].fieldName"  value="@conditionName" class="form-control"  style="display: none">
+                <input name="conditionList[@i].fieldType"  value=@SearchUtil.SEARCH_BOOLEAN_TYPE class="form-control"  style="display:none">
+                <input name="conditionList[@i].compQueryOp"  value="=" class="form-control"  style="display:none">
+                <select class="selectpicker conditionBooleanValue" name="conditionList[@i].fieldValue" data-style="btn btn-primary" >
+                    <option value=@SearchUtil.SEARCH_BOOLEAN_TRUE_VALUE_STRING @if(condition.getFieldValue.equals(SearchUtil.SEARCH_BOOLEAN_TRUE_VALUE_STRING) ){selected} >@SearchUtil.SEARCH_BOOLEAN_TRUE_VALUE_STRING</option>
+                    <option value=@SearchUtil.SEARCH_BOOLEAN_FALSE_VALUE_STRING  @if(condition.getFieldValue.equals(SearchUtil.SEARCH_BOOLEAN_FALSE_VALUE_STRING) || condition.getFieldValue == null){selected}>@SearchUtil.SEARCH_BOOLEAN_FALSE_VALUE_STRING</option>
+                    <option value=@SearchUtil.SEARCH_ANY_OP_STRING  @if(condition.getFieldValue.equals(SearchUtil.SEARCH_ANY_OP_STRING) || condition.getFieldValue == null){selected}>@Messages("filter.any")</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
