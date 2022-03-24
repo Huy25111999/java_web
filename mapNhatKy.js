@@ -133,3 +133,45 @@ document.getElementById("btn-seach").onclick=function ()
     })
 }
 
+// Table
+document.getElementById("btn-seach").onclick=function ()
+{
+    var timeStart =$("#date_timepicker_start").val();
+    var timeEnd = $("#date_timepicker_end").val();
+    var roles = $("#imeiDevice").val();
+
+    var item = new FormData();
+    item.id=roles;
+    item.start_time = timeStart;
+    item.end_time = timeEnd;
+    item.imei = $("#imeiDevice option:selected").text();
+    console.log(item);
+    var table = '<table class="table table-striped table-hover table-condensed table-export" id="table-history-view">\n' +
+        '    <thead id="theadExport">\n' +
+        '    <tr>\n' +
+        '        <th className="text-center">STT</th>\n' +
+        '        <th>Trạng thái</th>\n' +
+        '        <th >Thời gian</th>\n' +
+        '    </tr>\n' +
+        '    </thead>\n' +
+        '    <tbody>';
+    $.ajax({
+        url:"/loadLocationHistory",
+        method:"POST",
+        dataType: 'json',
+        data:JSON.stringify(item),
+        contentType: "application/json; charset=utf-8",
+        success:function (res){
+            alert(1);
+            table +=' <tr></tr>';
+            table +='</tbody>';
+            table += '</table>';
+            document.getElementById('table').innerHTML = table;
+
+        },
+        error:function (err){
+            console.log("error");
+        }
+    })
+}
+
