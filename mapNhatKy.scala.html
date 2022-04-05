@@ -3,168 +3,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    @views.html.tags.main_css()
-
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <title>VTAG ADMIN</title>
+    <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/logo.png")">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link href="/assets/stylesheets/fonts/font-awesome.min.css" rel="stylesheet">
     <link href="@routes.Assets.versioned("stylesheets/map/mapNhatKy.css")" rel="stylesheet" >
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
 </head>
-<body>
+<body id="map">
+
 <div class="wrapper" id="wrapper">
-    @views.html.tags.DashboardMenu(currentUser)
-    <div class="main-panel">
-        <div class="content">
+    <!--    sidebar-->
+    <div class="sidebar" data-color="rose" data-background-color="black" data-image="/assets/images/loginbg.png">
+        <div class="logo">
+            <a href="" class="simple-text logo-mini">
+                VA
+            </a>
+            <a href="" class="simple-text logo-normal">
+                vTag Admin
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="/assets/images/logo.png" />
+                </div>
+                <div class="user-info">
+                    <a data-toggle="collapse" href="#collapseExample" class="username">
+                    <span>
+                        admin1
+                        <b class="caret"></b>
+                    </span>
+                    </a>
 
-            <div class="container-fluid">
-                <div style="clear:both;"></div>
+                    <div class="collapse" id="collapseExample">
+                        <!--    <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="sidebar-mini"> MP </span>
+                                        <span class="sidebar-normal"> My Profile </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="sidebar-mini"> EP </span>
+                                        <span class="sidebar-normal"> Edit Profile </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="sidebar-mini"> S </span>
+                                        <span class="sidebar-normal"> Settings </span>
+                                    </a>
+                                </li>
+                            </ul>
+                      -->   </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card" id="card">
-
-                            <div id="sidebar-wrapper" class="sidebar-wrapper-map">
-
-                                <div id="map-content">
-                                    <div id="sidebar-content" class="sidebar-content">
-                                        <!--map-head-->
-                                        <div class="sidebar-body">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">Nhật ký hành trình</h4>
-                                            </div>
-                                            <div class="panel-body">
-
-                                                <div class="form-horizontal">
-                                                    <div class="search-field row">
-                                                        <label for="date_timepicker_start" class="col-3 col-form-label form-group"> Bắt đầu </label>
-                                                        <div id="date_timepicker_start1" class="date_timepicker_start col-9">
-                                                            <span class="bmd-form-group is-filled"><input id="date_timepicker_start" class="form-control datetimepicker" type="text" value="14/03/2022 00:00" autocomplete="off"></span>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="search-field row">
-                                                        <label for="date_timepicker_start" class="col-3 col-form-label form-group"> Kết thúc </label>
-                                                        <div id="date_timepicker_start2" class="date_timepicker_start col-9">
-                                                            <span class="bmd-form-group is-filled"><input id="date_timepicker_end" class="form-control datetimepicker" type="text" value="14/03/2022 00:00" autocomplete="off" ></span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12 form-horizontal" style="padding: 3px 0;">
-                                                    <div class="search-field">
-                                                        <div class="row">
-                                                            <label class="col-sm-3 col-form-label">Thiết bị</label>
-                                                            <div class="col-sm-8" id="selectDevice">
-
-                                                            </div>
-                                                            <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!--Modal-Text-right-->
-                                                <div class="col-md-12 text-right" >
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button id="btn-seach" type="button" class="btn btnControlHistory btn-danger btn-seach-view" >Tìm kiếm</button>
-                                                            <select type="button" class="btn btn-danger"  id="searchQuickHistory"  title="Tìm kiếm nhanh">
-                                                                <option value="">Tìm nhanh</option>
-                                                                <option value="1">1 ngày trước</option>
-                                                                <option value="3">3 ngày trước</option>
-                                                                <option value="7">7 ngày trước</option>
-                                                                <option value="15">15 ngày trước</option>
-                                                                <option value="30">30 ngày trước</option>
-                                                                <div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div></div></select>
-                                                            <button type="button" id="buttonPlayStop" class="btn btnControlHistory btn-danger btn-seach-view" >
-                                                                <i class="material-icons">play_arrow</i> Xem
-                                                            </button>
-                                                            <select type="button" class="btn btn-danger" id="changeSpeedPlay" title="Tìm kiếm nhanh">
-                                                                <option value="0.5">Tốc độ 0.5</option>
-                                                                <option value="1" selected="">Tốc độ 1.0</option>
-                                                                <option value="2">Tốc độ 2.0</option>
-                                                                <option value="5">Tốc độ 5.0</option>
-                                                                <div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 584px; top: 281px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div></div></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--   Map-Table-->
-                                                <div id="scroll-area-position" class="col-md-12" >
-                                                    <div id="table" class="table-responsive">
-                                                    </div>
-                                                </div>
-                                                <!--    Table-count-->
-                                                <div class="col-md-12 table-count" >
-                                                    <div class="count count-left">Tổng</div>
-                                                    <div class="count count-right">?</div>
-                                                </div>
-
-                                                <!--    map-bottom-->
-                                                <div class="">
-                                                    <div class="pn footer" >
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/map/startIcon.png" width="24" height="24">
-                                                                    <label >Bắt đầu</label>
-                                                                </div>
-                                                                <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/greenVtag.png" width="24" height="24">
-                                                                    <label >Bắt đầu di chuyển</label>
-                                                                </div>
-                                                                <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/map/endIcon.png" width="24" height="24">
-                                                                    <label >Kết thúc</label>
-                                                                </div>
-                                                                <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/blueVtag.png" width="24" height="24">
-                                                                    <label >Đang di chuyển</label>
-                                                                </div>
-                                                                <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/redVtag.png" width="24" height="24">
-                                                                    <label >Cảnh báo</label>
-                                                                </div>
-                                                                <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/orangeVtag.png" width="24" height="24">
-                                                                    <label >Dừng</label>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a id="menu-toggle" class="move-in"><img src="http://203.113.138.18:4444/assets/img/sidebar/moveicon-in.png"></a>
-                                    <div id="map"></div>
-                                    <div class="zoom">
-                                        <button type="button" class="zoom-content zoom-in">
-                                            <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M18%207h-7V0H7v7H0v4h7v7h4v-7h7z%22/%3E%3C/svg%3E" alt="" >
-                                        </button>
-                                        <div class="zoom-center"></div>
-                                        <button type="button" class="zoom-content zoom-out">
-                                            <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%207h18v4H0V7z%22/%3E%3C/svg%3E" alt="" >
-                                        </button>
-                                    </div>
-                                    <div class="screen">
-                                        <button type="button" class="zoom-content" ><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%200v6h2V2h4V0H0zm16%200h-4v2h4v4h2V0h-2zm0%2016h-4v2h6v-6h-2v4zM2%2012H0v6h6v-2H2v-4z%22/%3E%3C/svg%3E" alt=""></button>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
 
         </div>
+        <div class="page-nav">
+            <ul class="nav">
+
+                <li class="nav-item" id="menu-manageUser" >
+                    <a class="nav-link" href="/userList">
+                        <i class="fa fa-user"></i>
+                        <p> Manage User </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item " id="menu-TableUser" >
+                    <a class="nav-link" href="/table2">
+                        <i class="fa fa-user"></i>
+                        <p> TableUser </p>
+                    </a>
+                </li>
+
+                <li class="nav-item " id="adminUser1" >
+                    <a class="nav-link" href="/formTable">
+                        <i class="fa fa-user"></i>
+                        <p> Admin User </p>
+                    </a>
+                </li>
+
+                <li class="nav-item " id="mapNhatKy" >
+                    <a class="nav-link" href="/mapNhatKy">
+                        <i class="fa fa-user"></i>
+                        <p> Nhật Ký Hành Trình </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="/logout" >
+                        <i class="fa fa-sign-out"></i>
+                        <p> Logout </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--    panel-->
+    <div id="map-content">
+        <div id="sidebar-content" class="sidebar-content">
+            <!--map-head-->
+            <div class="sidebar-body">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Nhật ký hành trình</h4>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-horizontal">
+                        <div class="search-field row">
+                            <label for="date_timepicker_start" class="col-3 col-form-label form-group"> Bắt đầu </label>
+                            <div id="date_timepicker_start1" class="date_timepicker_start col-9">
+                                <span class="bmd-form-group is-filled"><input id="date_timepicker_start" class="form-control datetimepicker" type="text" value="14/03/2022 00:00" autocomplete="off" ></span>
+
+                            </div>
+                        </div>
+                        <div class="search-field row">
+                            <label for="date_timepicker_start" class="col-3 col-form-label form-group"> Kết thúc </label>
+                            <div id="date_timepicker_start2" class="date_timepicker_start col-9">
+                                <span class="bmd-form-group is-filled"><input id="date_timepicker_end" class="form-control datetimepicker" type="text" value="14/03/2022 00:00" autocomplete="off" ></span>
+
+                            </div>
+                        </div>
+                    </div>
+<!--                    device-->
+                    <div class="device">
+                        <label class="col-sm-3 col-form-label">Thiết bị</label>
+                        <div class="col-sm-8" id="selectDevice">
+                        </div>
+                        <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+                    </div>
+
+                    <!--Modal-Text-right-->
+                    <div class="col-md-12 text-right" >
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button id="btn-seach" type="button" class="btn btnControlHistory btn-danger btn-seach-view" >Tìm kiếm</button>
+                                <select type="button" class="btn btn-danger"  id="searchQuickHistory"  title="Tìm kiếm nhanh">
+                                    <option value="">Tìm nhanh</option>
+                                    <option value="1">1 ngày trước</option>
+                                    <option value="3">3 ngày trước</option>
+                                    <option value="7">7 ngày trước</option>
+                                    <option value="15">15 ngày trước</option>
+                                    <option value="30">30 ngày trước</option>
+                                    <div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div><div class="ripple-decorator ripple-on ripple-out" style="left: 594px; top: 235px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div></div></select>
+                                <button type="button" id="buttonPlayStop" class="btn btnControlHistory btn-danger btn-seach-view" >
+                                    <i class="material-icons">play_arrow</i> Xem
+                                </button>
+                                <select type="button" class="btn btn-danger" id="changeSpeedPlay" title="Tìm kiếm nhanh">
+                                    <option value="0.5">Tốc độ 0.5</option>
+                                    <option value="1" selected="">Tốc độ 1.0</option>
+                                    <option value="2">Tốc độ 2.0</option>
+                                    <option value="5">Tốc độ 5.0</option>
+                                    <div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 584px; top: 281px; background-color: rgb(255, 255, 255); transform: scale(21.2754);"></div></div></select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--   Map-Table-->
+                    <div id="scroll-area-position" class="col-md-12" >
+                        <div id="table" class="table-responsive">
+                        </div>
+                    </div>
+                    <!--    Table-count-->
+                    <div class="col-md-12 table-count" >
+                        <div class="count count-left">Tổng</div>
+                        <div class="count count-right">?</div>
+                    </div>
+
+                    <!--    map-bottom-->
+                    <div class="">
+                        <div class="pn footer" >
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/map/startIcon.png" width="24" height="24">
+                                        <label >Bắt đầu</label>
+                                    </div>
+                                    <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/greenVtag.png" width="24" height="24">
+                                        <label >Bắt đầu di chuyển</label>
+                                    </div>
+                                    <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/map/endIcon.png" width="24" height="24">
+                                        <label >Kết thúc</label>
+                                    </div>
+                                    <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/blueVtag.png" width="24" height="24">
+                                        <label >Đang di chuyển</label>
+                                    </div>
+                                    <div class="col-md-5"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/redVtag.png" width="24" height="24">
+                                        <label >Cảnh báo</label>
+                                    </div>
+                                    <div class="col-md-7"><img style="float: left" src="http://203.113.138.18:4444/assets/img/car/orangeVtag.png" width="24" height="24">
+                                        <label >Dừng</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <a id="menu-toggle" class="move-in"><img src="http://203.113.138.18:4444/assets/img/sidebar/moveicon-in.png"></a>
+
+        <div class="zoom">
+            <button type="button" class="zoom-content zoom-in">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M18%207h-7V0H7v7H0v4h7v7h4v-7h7z%22/%3E%3C/svg%3E" alt="" >
+            </button>
+            <div class="zoom-center"></div>
+            <button type="button" class="zoom-content zoom-out">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%207h18v4H0V7z%22/%3E%3C/svg%3E" alt="" >
+            </button>
+        </div>
+        <div class="screen">
+            <button type="button" class="zoom-content" ><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%200v6h2V2h4V0H0zm16%200h-4v2h4v4h2V0h-2zm0%2016h-4v2h6v-6h-2v4zM2%2012H0v6h6v-2H2v-4z%22/%3E%3C/svg%3E" alt=""></button>
+        </div>
     </div>
 </div>
 
+<!--Javascript-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="@routes.Assets.versioned("javascripts/views/map/mapNhatKy.js")" type="text/javascript"></script>
-
-<!--datetimepicker-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
 </body>
 </html>
