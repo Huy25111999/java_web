@@ -18,7 +18,6 @@ $(document).ready(function() {
     select();
     marker();
     timepicker();
-
 })
 
 //Time
@@ -48,7 +47,7 @@ function select(){
             var data= res.content.data.data;
             for ( var i=0; i < data.length;i++)
             {
-                select += '<option value="'+data[i].id+'" data-select2-id="4">'+data[i].imei+'</option>';
+                select += '<option value="'+data[i].entity_id+'" data-select2-id="4">'+data[i].imei+'</option>';
             }
             select += '</select>';
             document.getElementById('selectDevice').innerHTML = select;
@@ -79,7 +78,23 @@ function marker(){
 
 
 // Table
+var MARKER_TYPE = {
+    UNKNOWN: {value: -1, name: "Không xác định"},
+    START: {value: 0, name: "Bắt đầu"},
+    FINISH: {value: 1, name: "Kết thúc"},
+    RUN: {value: 2, name: "Bắt đầu di chuyển", type : "AST"},
+    PARK: {value: 3, name: "Dừng", type : "ASP"},
+    WIFICELL: {value: 4, name: "Đang di chuyển", type : "WFC"},
+    SOS: {value: 5, name: "Cảnh báo SOS", type : "SOS"},
+    BL: {value: 6, name: "Pin yếu", type : "BL"}
+};
+
 document.getElementById("btn-seach").onclick=function ()
+{
+    table();
+}
+
+function table ()
 {
     var timeStart =$("#date_timepicker_start").val();
     var timeEnd =  $("#date_timepicker_end").val();
@@ -90,8 +105,6 @@ document.getElementById("btn-seach").onclick=function ()
     item.imei = $("#imeiDevice option:selected").text();
     item.start_time = timeStart;
     item.end_time = timeEnd;
-
-    console.log(1);
     console.log(item);
     var table = '<table class="table table-striped table-hover table-condensed table-export" id="table-history-view">\n' +
         '    <thead id="theadExport">\n' +
@@ -102,6 +115,7 @@ document.getElementById("btn-seach").onclick=function ()
         '    </tr>\n' +
         '    </thead>\n' +
         '    <tbody>';
+
     $.ajax({
         url:"/loadLocationHistory",
         method:"POST",
@@ -109,8 +123,20 @@ document.getElementById("btn-seach").onclick=function ()
         data:JSON.stringify(item),
         contentType: "application/json; charset=utf-8",
         success:function (res){
-            alert(1);
-            table +=' <tr></tr>';
+            console.log(res.content);
+            var data = res.content ;
+            console.log(data.length);
+
+            for ( var i= 0; i<data.length ; i++)
+            {
+
+                table +=' <tr>';
+                table += '<td>'+(i+1)+'</td>';
+                table += '<td>'+Object.values( MARKER_TYPE ).find(t => t.type == data[i].type).name+'</td>';
+                table += '<td>'+data[i].logDate+'</td>';
+                table +='</tr>';
+            }
+
             table +='</tbody>';
             table += '</table>';
             document.getElementById('table').innerHTML = table;
@@ -121,3 +147,4 @@ document.getElementById("btn-seach").onclick=function ()
         }
     })
 }
+
