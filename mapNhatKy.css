@@ -210,6 +210,7 @@ option{
 .col-md-5 {
     padding: 0px 35px;
 }
+/*
 .zoom {
     height: 81px;
     position: fixed;
@@ -249,6 +250,9 @@ button.zoom-content{
     background: rgb(255,255,255);
     z-index: 4;
 }
+*/
+
+
 /*dateTime*/
 div.date_timepicker_start{
     position: relative;
@@ -272,4 +276,28 @@ input#date_timepicker_start, input#date_timepicker_end {
 div#table {
     height: 425px;
     background: violet;
+}
+
+/*Zoom*/
+
+button.mapboxgl-ctrl-zoom-in, button.mapboxgl-ctrl-zoom-out, button.mapboxgl-ctrl-fullscreen  {
+    width: 40px;
+    height: 40px;
+}
+
+button.mapboxgl-ctrl-compass {
+    display: none;
+}
+
+/*Modal*/
+#modal {
+    width: 723px;;
+    height: 215px;
+    background: #0AA699;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 100px;
+    left: 33%;
+    display: none;
 }

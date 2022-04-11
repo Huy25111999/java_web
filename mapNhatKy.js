@@ -70,9 +70,12 @@ function marker(){
         center: [ 103.90462168031246, 20.668780521951536 ],
         zoom: 5,
     });
+    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.FullscreenControl());
     const marker1 = new mapboxgl.Marker()
         .setLngLat([-74.5, 40])
         .addTo(map);
+
 }
 
 
@@ -106,16 +109,8 @@ function table ()
     item.start_time = timeStart;
     item.end_time = timeEnd;
     console.log(item);
-    var table = '<table class="table table-striped table-hover table-condensed table-export" id="table-history-view">\n' +
-        '    <thead id="theadExport">\n' +
-        '    <tr>\n' +
-        '        <th className="text-center">STT</th>\n' +
-        '        <th>Trạng thái</th>\n' +
-        '        <th >Thời gian</th>\n' +
-        '    </tr>\n' +
-        '    </thead>\n' +
-        '    <tbody>';
 
+    var table = '';
     $.ajax({
         url:"/loadLocationHistory",
         method:"POST",
@@ -127,20 +122,16 @@ function table ()
             var data = res.content ;
             console.log(data.length);
 
+
             for ( var i= 0; i<data.length ; i++)
             {
-
-                table +=' <tr>';
+                table +=' <tr onclick="openModal(),render('+data[i].stt+')">';
                 table += '<td>'+(i+1)+'</td>';
                 table += '<td>'+Object.values( MARKER_TYPE ).find(t => t.type == data[i].type).name+'</td>';
-                table += '<td>'+data[i].logDate+'</td>';
+                table += '<td>'+moment.unix(data[i].logDate).format("DD/MM/YYYY HH:mm:ss")+'</td>';
                 table +='</tr>';
             }
-
-            table +='</tbody>';
-            table += '</table>';
-            document.getElementById('table').innerHTML = table;
-
+            document.getElementById('table-map').innerHTML = table;
         },
         error:function (err){
             console.log("error");
@@ -148,3 +139,88 @@ function table ()
     })
 }
 
+// Modal
+function openModal()
+{
+    $('#modal').css('display','block');
+ //   document.getElementById("modal").style.display='block';
+}
+
+//Close modal
+$('#btn-close').click(function ()
+{
+    $('#modal').css('display','none');
+})
+
+function render(index) {
+    var timeStart =$("#date_timepicker_start").val();
+    var timeEnd =  $("#date_timepicker_end").val();
+    var roles = $("#imeiDevice").val();
+
+    var item = new FormData();
+    item.id = roles;
+    item.imei = $("#imeiDevice option:selected").text();
+    item.start_time = timeStart;
+    item.end_time = timeEnd;
+    console.log(item);
+
+    var modalContent = "";
+    var dataTable = "";
+    $.ajax({
+        url: "/loadLocationHistory",
+        method: "POST",
+        dataType: 'json',
+        data:JSON.stringify(item),
+        contentType: "application/json; charset=utf-8",
+        success: function (res) {
+            var data = res.content;
+            for (var i =0; i<data.length;i++)
+            {
+                if ((data[i].stt) == index)
+                {
+                    modalContent += '<b>'+'Imei: '+data[i].imei+'</b>';
+                    modalContent += '<div>'+'ID: '+data[i].bienso+'</div>';
+                    modalContent += '<div>'+'Thời gian: '+moment.unix(data[i].logDate).format("DD/MM/YYYY HH:mm:ss")+'</div>';
+                    modalContent += '<div>'+'Tọa độ: '+ convertDMS(data[i].lat,data[i].lon)+'</div>';
+                    modalContent += '<div>'+'Trạng thái 1: '+data[i].status1 +'</div>';
+                    dataTable += '<tr>';
+                    dataTable +='<td>'+ data[i].ss+'</td>';
+                    dataTable +='<td>'+ data[i].P+'</td>';
+                    dataTable +='<td>'+ data[i].B+'</td>';
+                    dataTable +='<td>'+ data[i].r+'</td>';
+                    dataTable +='<td>'+ data[i].V+'</td>';
+                    dataTable +='<td>'+ data[i].W+'</td>';
+                    dataTable +='<td>'+ data[i].Cn+'</td>';
+                    dataTable +='<td>'+ data[i].M+'</td>';
+                    dataTable +='<td>'+( (data[i].N == 3)?"NB/2G":(data[i].N ==2 ? "2G": " "))+'</td>';
+                    dataTable += '</tr>';
+                }
+            }
+            document.getElementById('modal-id').innerHTML= modalContent ;
+            document.getElementById('modal-table-content').innerHTML= dataTable ;
+        },
+        error: function (error) {
+            alert(2);
+        }
+    })
+}
+
+function toDegreesMinutesAndSeconds(coordinate) {
+    var absolute = Math.abs(coordinate);
+    var degrees = Math.floor(absolute);
+    var minutesNotTruncated = (absolute - degrees) * 60;
+    var minutes = Math.floor(minutesNotTruncated);
+    // var seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+    var seconds = ((minutesNotTruncated - minutes) * 60).toFixed(2);
+    return degrees + "°" + minutes + "'" + seconds +"''";
+}
+
+function convertDMS(lat, lng) {
+    var latitude = toDegreesMinutesAndSeconds(lat);
+    var latitudeCardinal = Math.sign(lat) >= 0 ? "N" : "S";
+
+    var longitude = toDegreesMinutesAndSeconds(lng);
+    var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
+
+    return latitude + " " + latitudeCardinal + " - " + longitude + " " + longitudeCardinal;
+}
