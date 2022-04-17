@@ -13,6 +13,9 @@
     display: flex;
     position: relative;
 }
+.sidebar {
+    z-index: 3;
+}
 .sidebar-content {
     height: 100%;
     padding: 0;
@@ -182,18 +185,24 @@ input.datetimepicker{
     padding-left: 23px;
     padding-right: 12px;
 }
+select#imeiDevice {
+    font-size: large;
+    font-weight: 300;
+    color: #3C4858;
+}
+
 select#imeiDevice>option {
     color: #fff;
     background: #999999;
+    font-size: large;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
-option{
-    font-size: inherit;
-}
-
 #map {
     margin-top: 0;
     height: calc(100vh - 0px);
 }
+
+/*Table count*/
 .table-count {
     display: flex;
     background: #F1EDEB;
@@ -210,72 +219,30 @@ option{
 .col-md-5 {
     padding: 0px 35px;
 }
-/*
-.zoom {
-    height: 81px;
-    position: fixed;
-    z-index: 4;
-    width: 40px;
-    right: 15px;
-    bottom: 112px;
-    background: rgb(255,2555,255);
-}
-.zoom-in,.zoom-out{
-    height: 40px;
-}
-.zoom-in{
-    border-bottom: 1px solid;
-}
-button>img {
-    width: 18px;
-    height: 18px;
-}
-button.zoom-content{
-    border: 0;
-    width: 40px;
-    background: rgb(255,255,255);
-}
-.zoom-center {
-    width: 30px;
-    height: 1px;
-    margin: 0 5px;
-    background: rgb(230, 230, 230);
-}
-.screen {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    right: 15px;
-    bottom: 50px;
-    background: rgb(255,255,255);
-    z-index: 4;
-}
-*/
-
-
 /*dateTime*/
 div.date_timepicker_start{
     position: relative;
 }
-.datepicker.datepicker-inline {
-    background: #FFFFFF;
-    position: fixed;
-    z-index: 4;
-    width: 311px;
-    box-shadow: 0 0 15px rgb(0 0 0.15);
-}
+
 input#date_timepicker_start, input#date_timepicker_end {
     background: #fff;
-    border-bottom: 1px solid red;
-}
-.table-condensed>thead>tr>th {
-    padding: 10px;
+    border-bottom: 1px solid #d2d2d2;
+
 }
 
+input.active {
+    background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px) !important;
+}
+span.flatpickr-day {
+    font-size: 14px;
+}
+span.flatpickr-weekday,.flatpickr-current-month,input.numInput.cur-year,span.flatpickr-am-pm {
+    font-size: 14px;
+}
 
+/*Tabele*/
 div#table {
     height: 425px;
-    background: violet;
 }
 
 /*Zoom*/
@@ -290,14 +257,20 @@ button.mapboxgl-ctrl-compass {
 }
 
 /*Modal*/
+button#btn-close {
+    width: 30px;
+    height: 30px;
+}
 #modal {
     width: 723px;;
     height: 215px;
-    background: #0AA699;
     display: block;
     position: fixed;
     z-index: 1;
     top: 100px;
     left: 33%;
     display: none;
+}
+.mapboxgl-popup-content {
+    width: 648px;
 }
